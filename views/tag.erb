@@ -1,0 +1,27 @@
+<% if @recipes.any? %>
+<ul>
+    <%@recipes.each() do |recipe|%>
+    <form action="/recipes" method="post">
+        <li>
+            <a href="/recipes/<%=recipe.id%>"><%= recipe.name() %></a>
+            <input type="hidden" name='_method' value="delete">
+            <input type="hidden" name='id' value=<%=recipe.id()%>>
+            <button class="btn btn-warning btn-xs">Delete</button>
+        </li>
+    </form>
+    <%end%>
+<% else %>
+    <p>
+        There are no Recipes yet!
+    </p>
+
+    <% end %>
+
+    <div class="text-center">
+        <form action="/recipes" method="post">
+            <label for="name">Recipe</label>
+            <input id="name" name="name" type="text">
+            <input id="self_id" name="self_id" type="hidden" value="<%=@tag.id%>">
+            <button class="btn btn-info btn-cons" type="submit">Add Recipe</button>
+        </form>
+    </div>

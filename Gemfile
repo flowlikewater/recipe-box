@@ -10,5 +10,4 @@ source("https://rubygems.org")
     group(:test) do
       gem("rspec")
       gem("capybara", :require => "capybara/rspec")
-      gem("shoulda-matchers", '~> 2.0')
     end

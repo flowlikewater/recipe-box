@@ -1,0 +1,26 @@
+<% if @tags.any? %>
+<ul>
+    <%@tags.each() do |tag|%>
+    <form action="/tags" method="post">
+        <li>
+            <a href="/tags/<%=tag.id%>"><%= tag.name() %></a>
+            <input type="hidden" name='_method' value="delete">
+            <input type="hidden" name='id' value=<%=tag.id()%>>
+            <button class="btn btn-warning btn-xs">Delete</button>
+        </li>
+    </form>
+    <%end%>
+<% else %>
+    <p>
+        There are no Categories yet!
+    </p>
+
+    <% end %>
+
+    <div class="text-center">
+        <form action="/tags" method="post">
+            <label for="name">Category:</label>
+            <input id="name" name="name" type="text">
+            <button class="btn btn-info btn-cons" type="submit">Add Category</button>
+        </form>
+    </div>
