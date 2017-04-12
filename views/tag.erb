@@ -4,12 +4,29 @@
     <form action="/recipes" method="post">
         <li>
             <a href="/tags/<%=@tag.id%>/recipes/<%=recipe.id%>"><%= recipe.name() %></a>
+            <% if recipe.rate != nil %>
+            <strong>
+                Rated:
+                <%=recipe.rate()%>
+            </strong>
+            <% end %>
+
             <input type="hidden" name='_method' value="delete">
             <input id="self_id" name="self_id" type="hidden" value="<%=@tag.id%>">
             <input type="hidden" name='id' value=<%=recipe.id()%>>
             <button class="btn btn-warning btn-xs">Delete</button>
         </li>
     </form>
+
+    <form action="/recipes" method="post">
+        <input name="_method" value="patch" type="hidden">
+        <input id="self_id" name="self_id" type="hidden" value="<%=@tag.id%>">
+        <input type="hidden" name='id' value=<%=recipe.id()%>>
+        <label for="rate">Rate Value</label>
+        <input id="rate" name="rate" type="number">
+        <button type="submit" class="btn btn-danger btn-xs">Rate it!</button>
+    </form>
+
     <%end%>
 <% else %>
     <p>
@@ -22,6 +39,7 @@
         <form action="/recipes" method="post">
             <label for="name">Recipe</label>
             <input id="name" name="name" type="text">
+            <input id="self_id" name="self_id" type="hidden" value="<%=@tag.id%>">
             <button class="btn btn-info btn-cons" type="submit">Add Recipe</button>
         </form>
     </div>

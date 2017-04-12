@@ -21,6 +21,8 @@ end
     redirect("/")
   end
 
+
+
 get ('/tags/:id') do
   @tag=Tag.find(params.fetch('id').to_i)
   @recipes=@tag.recipes
@@ -40,6 +42,14 @@ end
     recipe=Recipe.find(params.fetch('id').to_i)
     recipe.delete
     self_id=params.fetch('self_id')
+    redirect("/tags/#{self_id}")
+  end
+
+  patch ('/recipes') do
+    recipe=Recipe.find(params.fetch('id').to_i)
+    self_id=params.fetch('self_id')
+    rate=params.fetch('rate')
+    recipe.update({:rate => rate})
     redirect("/tags/#{self_id}")
   end
 
