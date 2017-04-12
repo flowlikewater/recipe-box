@@ -1,10 +1,5 @@
 require('spec_helper')
 
-describe(Ingredient) do
-  describe("#ingredients") do
-    it("...") do
-
-    end
-  end
-
-end
+# describe(Ingredient) do
+#   it { should have_and_belong_to_many(:recipes) }
+# end

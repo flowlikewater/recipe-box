@@ -1,10 +1,5 @@
 require('spec_helper')
 
-describe(Tag) do
-  describe("#tags") do
-    it("...") do
-
-    end
-  end
-
-end
+# describe(Ingredient) do
+#   it { should have_many(:recipes) }
+# end
