@@ -1,0 +1,30 @@
+<% if @ingredients.any? %>
+<ul>
+    <%@ingredients.each() do |ingredient|%>
+    <form action="/ingredients" method="post">
+        <li>
+            <%= ingredient.name() %>
+            <input type="hidden" name='_method' value="delete">
+            <input id="tag_id" name="tag_id" type="hidden" value="<%=@tag.id%>">
+            <input id="recipe_id" name="recipe_id" type="hidden" value="<%=@recipe.id%>">
+            <input type="hidden" name='id' value=<%=ingredient.id()%>>
+            <button class="btn btn-warning btn-xs">Delete</button>
+        </li>
+    </form>
+    <%end%>
+<% else %>
+    <p>
+        There are no Ingredients yet!
+    </p>
+
+    <% end %>
+
+    <div class="text-center">
+        <form action="/ingredients" method="post">
+            <label for="name">Ingredient</label>
+            <input id="name" name="name" type="text">
+            <input id="tag_id" name="tag_id" type="hidden" value="<%=@tag.id%>">
+            <input id="recipe_id" name="recipe_id" type="hidden" value="<%=@recipe.id%>">
+            <button class="btn btn-info btn-cons" type="submit">Add Ingredient</button>
+        </form>
+    </div>
