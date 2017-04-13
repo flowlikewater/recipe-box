@@ -1,0 +1,9 @@
+<h3><%=@ingredient.name%></h3>
+
+<h3>Recipes that use <strong> <%=@ingredient.name%> </strong></h3>
+
+<ul>
+  <% @recipes.each() do |recipe|%>
+    <a href='/'><%=recipe.name%></a>
+  <%end%>
+</ul>

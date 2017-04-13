@@ -6,6 +6,7 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get ("/") do
   @tags=Tag.all()
+  @ingredients = Ingredient.all()
   erb(:index)
 end
 
@@ -20,8 +21,6 @@ end
     tag.delete
     redirect("/")
   end
-
-
 
 get ('/tags/:id') do
   DB.exec("select * from recipes order by rate");
@@ -58,8 +57,19 @@ get ('/tags/:id/recipes/:id2') do
   @tag=Tag.find(params.fetch('id').to_i)
   @recipe=Recipe.find(params.fetch('id2').to_i)
   @ingredients=@recipe.ingredients
+  @all_ingredients = Ingredient.all()
   erb(:ingredients)
 end
+
+  post ('/ingredients1') do
+    tag_id = params.fetch('tag_id').to_i
+    recipe_id = params.fetch('recipe_id').to_i
+    recipe = Recipe.find(recipe_id)
+    ingredient_id=params.fetch("ingredient_id")
+    ingredient = Ingredient.find(ingredient_id)
+    ingredient.recipes << recipe     #<< means array appending character , ActiveRecord use this to update relation join table
+    redirect("/tags/#{tag_id}/recipes/#{recipe_id}")
+  end
 
   post ('/ingredients') do
     tag_id = params.fetch('tag_id').to_i
@@ -77,4 +87,16 @@ end
     ingredient= Ingredient.find(params.fetch('id'))
     ingredient.delete
     redirect("/tags/#{tag_id}/recipes/#{recipe_id}")
+  end
+
+get('/ingredients/:id') do
+  @ingredient = Ingredient.find(params.fetch('id').to_i())
+  @recipes = @ingredient.recipes()
+  erb(:ingredient)
+end
+
+  delete ('/ingredients') do
+    ingredient= Ingredient.find(params.fetch('id'))
+    ingredient.delete
+    redirect("/")
   end
