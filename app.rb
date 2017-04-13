@@ -24,8 +24,9 @@ end
 
 
 get ('/tags/:id') do
+  DB.exec("select * from recipes order by rate");
   @tag=Tag.find(params.fetch('id').to_i)
-  @recipes=@tag.recipes
+  @recipes=@tag.recipes.order("rate desc")
   erb(:tag)
 end
 

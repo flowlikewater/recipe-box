@@ -1,4 +1,5 @@
 <% if @recipes.any? %>
+
 <ul>
     <%@recipes.each() do |recipe|%>
     <form action="/recipes" method="post">
@@ -43,3 +44,11 @@
             <button class="btn btn-info btn-cons" type="submit">Add Recipe</button>
         </form>
     </div>
+
+
+
+    <form action="/">
+        <button class="btn btn-primary center-block">
+            Return to Main Page
+        </button>
+    </form>
